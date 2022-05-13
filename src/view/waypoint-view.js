@@ -1,6 +1,7 @@
 import {createElement} from '../render.js';
 
-const createWaypointTemplate = () => (
+const createWaypointTemplate = (point) => (
+  const {basePrice, dateFrom, dateTo, destination, id, isFavorite, offers, type} = point;
   `<li class="trip-events__item">
               <div class="event">
                 <time class="event__date" datetime="2019-03-18">MAR 18</time>
@@ -42,6 +43,10 @@ const createWaypointTemplate = () => (
 
 
 export default class WaypointView {
+  constructor(point) {
+    this.point = point;
+  }
+
   getTemplate() {
     return createWaypointTemplate();
   }
