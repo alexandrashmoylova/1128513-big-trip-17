@@ -3,7 +3,7 @@ import {TYPE} from './const.js';
 
 const generateOffer = () => ({
   type: getRandomArrayElement(TYPE),
-  offer: [
+  offers: [
     {
       id: 1,
       title: 'Choose the radio station',

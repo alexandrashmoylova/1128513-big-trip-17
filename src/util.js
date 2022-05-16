@@ -9,6 +9,10 @@ const getRandomInteger = (a = 0, b = 1) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const humanizeTaskDueDate = (dueDate) => dayjs(dueDate).format('D MMMM');
+const humanizePointDueDate = (dueDate) => dayjs(dueDate).format('MMM D');
+const humanizePointDueTime = (dueTime) => dayjs(dueTime).format('HH:mm');
+const humanizePointDueDateYear = (dueDate) => dayjs(dueDate).format('YYYY MM DD');
+const humanizePointDueDateYearTime = (dueTime) => dayjs(dueTime).format('YYYY-MM-DDTHH:mm');
 
-export {getRandomInteger, getRandomArrayElement, humanizeTaskDueDate};
+
+export {getRandomInteger, getRandomArrayElement, humanizePointDueDate, humanizePointDueTime, humanizePointDueDateYear, humanizePointDueDateYearTime};
