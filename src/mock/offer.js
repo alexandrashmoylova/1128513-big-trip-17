@@ -1,22 +1,22 @@
 import {getRandomInteger, getRandomArrayElement} from '../util.js';
-import {TYPE} from './const.js';
+import {TYPE, OFFERSTITLE} from './const.js';
 
 const generateOffer = () => ({
   type: getRandomArrayElement(TYPE),
   offers: [
     {
       id: 1,
-      title: 'Choose the radio station',
+      title: getRandomArrayElement(OFFERSTITLE),
       price: getRandomInteger(0, 140),
     },
     {
       id: 2,
-      title: 'Upgrade to a business class',
+      title: getRandomArrayElement(OFFERSTITLE),
       price: getRandomInteger(0, 90),
     },
     {
       id: 3,
-      title: 'Comfortable seats',
+      title: getRandomArrayElement(OFFERSTITLE),
       price: getRandomInteger(0, 100),
     },
   ]
