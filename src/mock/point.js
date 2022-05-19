@@ -1,5 +1,5 @@
 import {getRandomInteger, getRandomArrayElement} from '../util.js';
-import {DESTINATION, TYPE} from './const.js';
+import {TYPE} from './const.js';
 import { generateDestination } from './destination.js';
 import { generateOffer } from './offer.js';
 

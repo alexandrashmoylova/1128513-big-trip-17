@@ -1,5 +1,5 @@
 import {createElement} from '../render.js';
-import {humanizePointDueDate, humanizePointDueTime, humanizePointDueDateYear, humanizePointDueDateYearTime} from '../util.js';
+import {humanizePointDueDate, humanizePointDueTime, humanizePointDueDateYear, humanizePointDueDateYearTime, diffTimeHours, diffTimeMinutes} from '../util.js';
 
 const createWaypointTemplate = (point) => {
   const {basePrice, dateFrom, dateTo, destination, type, isFavorite, offers} = point;
@@ -9,9 +9,9 @@ const createWaypointTemplate = (point) => {
   const createOfferTemplate = (pointOffers) =>
     pointOffers.map((pointOffer) =>
       `<li class="event__offer">
-      <span class="event__offer-title">Order ${pointOffer.title}</span>
+      <span class="event__offer-title">${pointOffer.title}</span>
       &plus;&euro;&nbsp;
-      <span class="event__offer-price"${pointOffer.price}/span>
+      <span class="event__offer-price">${pointOffer.price}</span>
     </li>`
     ).join('');
 
@@ -29,10 +29,10 @@ const createWaypointTemplate = (point) => {
                     &mdash;
                     <time class="event__end-time" datetime="${humanizePointDueDateYearTime(dateTo)}">${humanizePointDueTime(dateTo)}</time>
                   </p>
-                  <p class="event__duration">30M</p>
+                  <p class="event__duration">${diffTimeHours(dateTo, dateFrom)}H${diffTimeMinutes(dateTo, dateFrom)}M</p>
                 </div>
                 <p class="event__price">
-                  &euro;&nbsp;<span class="event__price-value">${basePrice}/span>
+                  &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
                 </p>
                 <h4 class="visually-hidden">Offers:</h4>
                 <ul class="event__selected-offers">

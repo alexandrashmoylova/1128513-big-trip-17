@@ -8,7 +8,7 @@ const DESCRIPTION = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   'Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.'
 ];
 
-const OFFERSTITLE = ['Choose the radio station', 'Upgrade to a business class', 'Comfortable seats', 'Drinks included'];
+const OFFERSTITLE = ['Choose the radio station', 'Upgrade to a business class', 'Comfortable seats', 'Drinks included', 'Add luggage'];
 
 const PICS_QUATITY = 9;
 
