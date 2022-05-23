@@ -2,6 +2,7 @@ import ListView from '../view/list-view.js';
 import FormEditView from '../view/form-edit-view.js';
 import SortView from '../view/sort-view.js';
 import WaypointView from '../view/waypoint-view.js';
+import NoPointView from '../view/no-point-view.js';
 import {render} from '../render.js';
 
 export default class BoardPresenter {
@@ -17,7 +18,11 @@ export default class BoardPresenter {
 
   init = () => {
     this.#boardPoints = [...this.#pointModel.points];
-    this.#renderBoard();
+    if (this.#boardPoints.length === 0) {
+      render(new NoPointView(), this.#boardContainer);
+    } else {
+      this.#renderBoard();
+    }
   };
 
   #renderPoint = (point) => {
