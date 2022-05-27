@@ -50,6 +50,7 @@ export default class BoardPresenter {
       document.addEventListener('keydown', onEscKeyDown);
     });
 
+
     pointEditComponent.setEditClickHandler(() => {
       replaceFormToPoint();
       document.removeEventListener('keydown', onEscKeyDown);
