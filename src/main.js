@@ -1,7 +1,7 @@
 import TripInfoView from './view/trip-info.js';
 import PointModel from './model/point-model.js';
 import BoardPresenter from './presenter/board-presenter.js';
-import {render, RenderPosition} from './render.js';
+import {render, RenderPosition} from './framework/render.js';
 import FilterView from './view/filter-view.js';
 
 const siteTripMainElement = document.querySelector('.trip-main');
