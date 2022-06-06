@@ -20,10 +20,5 @@ const SortType = {
   OFFERS: 'offers',
 };
 
-// const FilterType = {
-//   EVERYTHING: 'everything',
-//   FUTURE: 'future',
-//   PAST: 'past',
-// };
 
 export {TYPE, DESTINATION, DESCRIPTION, PICS_QUATITY, OFFERSTITLE, SortType};
