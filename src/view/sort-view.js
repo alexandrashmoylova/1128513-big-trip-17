@@ -2,7 +2,7 @@ import AbstractView from '../framework/view/abstract-view.js';
 import {SortType} from '../mock/const.js';
 
 const createSortTemplate = () => (
-  ` <form class="trip-events__trip-sort  trip-sort" action="#" method="get">
+  `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
   <div class="trip-sort__item  trip-sort__item--day">
     <input id="sort-day" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-day">
     <label class="trip-sort__btn" for="sort-day" data-sort-type="${SortType.DAY}">Day</label>
@@ -37,7 +37,7 @@ export default class SortView extends AbstractView {
 
   setSortTypeChangeHandler = (callback) => {
     this._callback.sortTypeChange = callback;
-    this.element.addEventListener('change', this.#sortTypeChangeHandler);
+    this.element.addEventListener('click', this.#sortTypeChangeHandler);
   };
 
   #sortTypeChangeHandler = (evt) => {

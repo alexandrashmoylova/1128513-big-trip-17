@@ -14,8 +14,8 @@ const sortPointByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice
 const sortPointByDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 
 const sortPointByDuration = (pointA, pointB) => {
-  const durationPointA = dayjs(pointA.dateTo).diff(dayjs(pointA.dateFrom));
-  const durationPointB = dayjs(pointB.dateFrom).diff(dayjs(pointB.dateFrom));
+  const durationPointA = dayjs(pointA.dateTo).diff(pointA.dateFrom);
+  const durationPointB = dayjs(pointB.dateTo).diff(pointB.dateFrom);
   return durationPointB - durationPointA;
 };
 

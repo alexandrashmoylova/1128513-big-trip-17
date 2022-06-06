@@ -29,6 +29,7 @@ export default class BoardPresenter {
 
   init = () => {
     this.#boardPoints = [...this.#pointModel.points];
+    this.#sourcedPoints = [...this.#pointModel.points];
     this.#renderPointList();
   };
 
