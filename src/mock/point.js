@@ -3,11 +3,21 @@ import {TYPE} from './const.js';
 import { generateDestination } from './destination.js';
 import { generateOffer } from './offer.js';
 import { nanoid } from 'nanoid';
+import dayjs from 'dayjs';
+
+const generateDate = (dayStart, dayEnd) => {
+  const daysGap = getRandomInteger(dayStart, dayEnd);
+  const hoursGap = getRandomInteger(0, 24);
+  const minutesGap = getRandomInteger(0, 60);
+  const secondsGap = getRandomInteger(0, 60);
+
+  return dayjs().add(daysGap, 'day').add(hoursGap, 'hour').add(minutesGap, 'minute').add(secondsGap, 'second').toDate();
+};
 
 const generatePoint = () => ({
   basePrice: getRandomInteger(25, 1000),
-  dateFrom: '2019-07-10T22:55:56.845Z',
-  dateTo: '2019-07-11T11:22:13.375Z',
+  dateFrom: generateDate(0, 4),
+  dateTo: generateDate(5, 8),
   destination: generateDestination(),
   id: nanoid(),
   isFavorite: Boolean(getRandomInteger(0, 1)),

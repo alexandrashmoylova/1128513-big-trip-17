@@ -12,4 +12,13 @@ const OFFERSTITLE = ['Choose the radio station', 'Upgrade to a business class', 
 
 const PICS_QUATITY = 9;
 
-export {TYPE, DESTINATION, DESCRIPTION, PICS_QUATITY, OFFERSTITLE};
+const SortType = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFERS: 'offers',
+};
+
+
+export {TYPE, DESTINATION, DESCRIPTION, PICS_QUATITY, OFFERSTITLE, SortType};
