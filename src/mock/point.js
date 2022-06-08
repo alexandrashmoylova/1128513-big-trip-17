@@ -1,6 +1,6 @@
 import {getRandomInteger, getRandomArrayElement} from '../utils/common.js';
 import {TYPE} from './const.js';
-import { generateDestination } from './destination.js';
+import {DESTINATIONS_LIST} from './destination.js';
 import { generateOffer } from './offer.js';
 import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
@@ -18,8 +18,8 @@ const generatePoint = () => ({
   basePrice: getRandomInteger(25, 1000),
   dateFrom: generateDate(0, 4),
   dateTo: generateDate(5, 8),
-  destination: generateDestination(),
-  id: nanoid,
+  destination: getRandomArrayElement(DESTINATIONS_LIST),
+  id: nanoid(),
   isFavorite: Boolean(getRandomInteger(0, 1)),
   offers: generateOffer(),
   type: getRandomArrayElement(TYPE),

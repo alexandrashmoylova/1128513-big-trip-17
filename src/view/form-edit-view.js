@@ -1,5 +1,6 @@
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import { TYPE, DESTINATION } from '../mock/const.js';
+import { DESTINATIONS_LIST } from '../mock/destination.js';
 import { humanizePointEditDueTime } from '../utils/point.js';
 
 const BLANK_POINT = {
@@ -45,7 +46,7 @@ const createOfferItemTemplate = (offerItems) => (
 
 
 const createDestinationList = (destinations) => destinations.map((destination) => (
-  `<option value="${destination}"></option>`
+  `<option value="${destination.name}"></option>`
 )).join('');
 
 const createDestinationPhoto = (photos) => (
@@ -87,7 +88,7 @@ const createFormEditTemplate = (point) => {
   destination.name
 }" list="destination-list-1">
           <datalist id="destination-list-1">
-          ${createDestinationList(DESTINATION)}
+          ${createDestinationList(DESTINATIONS_LIST)} 
           </datalist>
         </div>
 
@@ -177,7 +178,7 @@ export default class FormEditView extends AbstractStatefulView {
   #pointDestinationTypeHandler = (evt) => {
     evt.preventDefault();
     this.updateElement({
-      destination: evt.target.value,
+      destination: {name: evt.target.value}
     });
   };
 

@@ -77,12 +77,12 @@ export default class BoardPresenter {
   };
 
   #renderSort = () => {
-    render(new SortView(), this.#boardContainer, RenderPosition.AFTERBEGIN);
+    render(this.#sortComponent, this.#boardContainer, RenderPosition.AFTERBEGIN);
     this.#sortComponent.setSortTypeChangeHandler(this.#handleSortTypeChange);
   };
 
   #renderNoPoint = () => {
-    render(new NoPointView(), this.#boardContainer);
+    render(this.#noPointComponent, this.#boardContainer);
   };
 
   #renderPoint = (point) => {

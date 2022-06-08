@@ -15,7 +15,7 @@ const generateOfferQuantity = (offersCount) => Array.from({length:(offersCount)}
 
 const generateOffer = () => ({
   type: getRandomArrayElement(TYPE),
-  offers: generateOfferQuantity(getRandomInteger(0, 6)),
+  offers: generateOfferQuantity(getRandomInteger(1, 6)),
 });
 
 export {generateOffer};
