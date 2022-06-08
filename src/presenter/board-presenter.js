@@ -83,7 +83,7 @@ export default class BoardPresenter {
   };
 
   #renderNoPoint = () => {
-    render(new NoPointView(), this.#boardContainer);
+    render(this.#noPointComponent, this.#boardContainer);
   };
 
   #renderPoint = (point) => {
