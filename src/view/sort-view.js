@@ -40,7 +40,7 @@ export default class SortView extends AbstractView {
     this.element.addEventListener('click', this.#sortTypeChangeHandler);
   };
 
-  #sortTypeChangeHandler = (evt) => { debugger
+  #sortTypeChangeHandler = (evt) => {
     if (evt.target.tagName !== 'LABEL') {
       return;
     }

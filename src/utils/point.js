@@ -9,7 +9,7 @@ const diffTimeHours = (dateTo, dateFrom) => dayjs(dateTo).diff(dayjs(dateFrom), 
 
 const diffTimeMinutes = (dateTo, dateFrom) => dayjs(dateTo).diff(dayjs(dateFrom), 'minute') % 60;
 
-const sortPointByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice; debugger
+const sortPointByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
 
 const sortPointByDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 

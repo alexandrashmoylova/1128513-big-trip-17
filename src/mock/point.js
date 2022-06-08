@@ -19,7 +19,7 @@ const generatePoint = () => ({
   dateFrom: generateDate(0, 4),
   dateTo: generateDate(5, 8),
   destination: generateDestination(),
-  id: nanoid,
+  id: nanoid(),
   isFavorite: Boolean(getRandomInteger(0, 1)),
   offers: generateOffer(),
   type: getRandomArrayElement(TYPE),

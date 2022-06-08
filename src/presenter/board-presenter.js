@@ -43,7 +43,7 @@ export default class BoardPresenter {
     this.#pointPresenter.get(updatedPoint.id).init(updatedPoint);
   };
 
-  #sortPoints = (sortType) => { debugger
+  #sortPoints = (sortType) => {
     // 2. Этот исходный массив задач необходим,
     // потому что для сортировки мы будем мутировать
     // массив в свойстве _boardPoints
@@ -55,7 +55,7 @@ export default class BoardPresenter {
         this.#boardPoints.sort(sortPointByDuration);
         break;
       case SortType.PRICE:
-        this.#boardPoints.sort(sortPointByPrice); debugger
+        this.#boardPoints.sort(sortPointByPrice);
         break;
       default:
         // 3. А когда пользователь захочет "вернуть всё, как было",
@@ -63,10 +63,10 @@ export default class BoardPresenter {
         this.#boardPoints = [...this.#sourcedPoints];
     }
 
-    this.#currentSortType = sortType; debugger
+    this.#currentSortType = sortType;
   };
 
-  #handleSortTypeChange = (sortType) => { debugger
+  #handleSortTypeChange = (sortType) => {
     if (this.#currentSortType === sortType) {
       return;
     }
