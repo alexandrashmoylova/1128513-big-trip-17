@@ -1,7 +1,10 @@
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
-import { TYPE, DESTINATION } from '../mock/const.js';
+import { TYPE } from '../mock/const.js';
 import { DESTINATIONS_LIST } from '../mock/destination.js';
 import { humanizePointEditDueTime } from '../utils/point.js';
+import { OFFERS } from '../mock/offer.js';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 
 const BLANK_POINT = {
   basePrice: 0,
@@ -60,7 +63,7 @@ const createDestinationPhoto = (photos) => (
 const createFormEditTemplate = (point) => {
   const { offers, destination, basePrice, dateTo, dateFrom } = point;
 
-  // const offersListType = offers.find((offer) => ((offer.type === type))).offers;
+  // const offersListByType = OFFERS.find((offer) => ((offer.type === type))).offers;
 
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
@@ -140,7 +143,7 @@ const createFormEditTemplate = (point) => {
 };
 
 export default class FormEditView extends AbstractStatefulView {
-  #point = null;
+  #datepicker = null;
   constructor(point = BLANK_POINT) {
     super();
     this._state = FormEditView.parsePointToState(point);
@@ -151,9 +154,25 @@ export default class FormEditView extends AbstractStatefulView {
     return createFormEditTemplate(this._state);
   }
 
+  removeElement = () => {
+    super.removeElement();
+
+    if (this.#datepicker) {
+      this.#datepicker.destroy();
+      this.#datepicker = null;
+    }
+  };
+
+  reset = (point) => {
+    this.updateElement(
+      FormEditView.parsePointToState(point),
+    );
+  };
+
   _restoreHandlers = () => {
     this.#setInnerHandlers();
     this.setFormSubmitHandler(this._callback.formSubmit);
+    this.setEditClickHandler(this._callback.editClick);
   };
 
   setFormSubmitHandler = (callback) => {
@@ -177,8 +196,9 @@ export default class FormEditView extends AbstractStatefulView {
 
   #pointDestinationTypeHandler = (evt) => {
     evt.preventDefault();
+    const destinationValue = DESTINATIONS_LIST.find((element) => ((element.name === evt.target.value)));
     this.updateElement({
-      destination: {name: evt.target.value}
+      destination: destinationValue
     });
   };
 
@@ -200,6 +220,45 @@ export default class FormEditView extends AbstractStatefulView {
   static parseStateToPoint = (state) => {
     const point = { ...state };
     return point;
+  };
+
+  #dateFromChangeHandler = ([userDate]) => {
+    this.updateElement({
+      dateFrom: userDate,
+    });
+  };
+
+  #dateToChangeHandler = ([userDate]) => {
+    this.updateElement({
+      dateTo: userDate,
+    });
+  };
+
+  #setDateFromDatePicker = () => {{
+    this.#datepicker = flatpickr(
+      this.element.querySelector('.event-start-time-1'),
+      {
+        enableTime: true,
+        dateFormat: 'd/m/Y H:i',
+        defaultDate: this._state.dateFrom,
+        onChange: this.#dateFromChangeHandler,
+      },
+    );
+  }
+  };
+
+
+  #setDateToatePicker = () => {{
+    this.#datepicker = flatpickr(
+      this.element.querySelector('.event-end-time-1'),
+      {
+        enableTime: true,
+        dateFormat: 'd/m/Y H:i',
+        defaultDate: this._state.dateTo,
+        onChange: this.#dateToChangeHandler,
+      },
+    );
+  }
   };
 
   setEditClickHandler = (callback) => {
