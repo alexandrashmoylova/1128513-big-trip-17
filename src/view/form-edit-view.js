@@ -20,7 +20,7 @@ const BLANK_POINT = {
   type: '',
 };
 
-const createOffersTypeTemplate = (offerTypes) => (
+const createOffersTypeTemplate = (offerTypes) =>
   offerTypes
     .map(
       (offerType) =>
@@ -28,11 +28,10 @@ const createOffersTypeTemplate = (offerTypes) => (
   <input id="event-type-${offerType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${offerType}">
   <label class="event__type-label  event__type-label--${offerType}" for="event-type-${offerType}-1">${offerType}</label>
 </div>`
-    ))
-  .join('');
+    )
+    .join('');
 
-
-const createOfferItemTemplate = (offerItems) => (
+const createOfferItemTemplate = (offerItems) =>
   offerItems
     .map(
       (offerItem) =>
@@ -44,26 +43,27 @@ const createOfferItemTemplate = (offerItems) => (
     <span class="event__offer-price">${offerItem.price}</span>
   </label>
 </div>`
-    ))
-  .join('');
+    )
+    .join('');
 
+const createDestinationList = (destinations) =>
+  destinations
+    .map((destination) => `<option value="${destination.name}">${destination.name}</option>`)
+    .join('');
 
-const createDestinationList = (destinations) => destinations.map((destination) => (
-  `<option value="${destination.name}"></option>`
-)).join('');
-
-const createDestinationPhoto = (photos) => (
-  photos.map(
-    (photo) =>
-      `<img class="event__photo" src=${photo.src} alt="Event photo">`
-  ))
-  .join('');
-
+const createDestinationPhoto = (photos) =>
+  photos
+    .map(
+      (photo) => `<img class="event__photo" src=${photo.src} alt="Event photo">`
+    )
+    .join('');
 
 const createFormEditTemplate = (point) => {
   const { offers, destination, basePrice, dateTo, dateFrom } = point;
 
-  // const offersListByType = OFFERS.find((offer) => ((offer.type === type))).offers;
+  // const offersListByType = offers.find((offer) => offer.type === type);
+  // const pointDestination = DESTINATIONS_LIST.find(
+  //   (item) => item.name === point.destination);
 
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
@@ -148,6 +148,8 @@ export default class FormEditView extends AbstractStatefulView {
     super();
     this._state = FormEditView.parsePointToState(point);
     this.#setInnerHandlers();
+    this.#setDateFromDatePicker();
+    this.#setDateToDatePicker();
   }
 
   get template() {
@@ -164,15 +166,15 @@ export default class FormEditView extends AbstractStatefulView {
   };
 
   reset = (point) => {
-    this.updateElement(
-      FormEditView.parsePointToState(point),
-    );
+    this.updateElement(FormEditView.parsePointToState(point));
   };
 
   _restoreHandlers = () => {
     this.#setInnerHandlers();
     this.setFormSubmitHandler(this._callback.formSubmit);
     this.setEditClickHandler(this._callback.editClick);
+    this.#setDateFromDatePicker();
+    this.#setDateToDatePicker();
   };
 
   setFormSubmitHandler = (callback) => {
@@ -196,9 +198,11 @@ export default class FormEditView extends AbstractStatefulView {
 
   #pointDestinationTypeHandler = (evt) => {
     evt.preventDefault();
-    const destinationValue = DESTINATIONS_LIST.find((element) => ((element.name === evt.target.value)));
+    const destinationValue = DESTINATIONS_LIST.find(
+      (element) => element.name === evt.target.value
+    );
     this.updateElement({
-      destination: destinationValue
+      destination: destinationValue,
     });
   };
 
@@ -207,19 +211,8 @@ export default class FormEditView extends AbstractStatefulView {
       .querySelector('.event__type-list')
       .addEventListener('change', this.#pointTypeHandler);
     this.element
-      .querySelector('.event__input--destination')
+      .querySelector('#event-destination-1')
       .addEventListener('change', this.#pointDestinationTypeHandler);
-  };
-
-  static parsePointToState = (point) => ({
-    ...point,
-    destination: point.destination,
-    offers: point.offers,
-  });
-
-  static parseStateToPoint = (state) => {
-    const point = { ...state };
-    return point;
   };
 
   #dateFromChangeHandler = ([userDate]) => {
@@ -234,31 +227,32 @@ export default class FormEditView extends AbstractStatefulView {
     });
   };
 
-  #setDateFromDatePicker = () => {{
-    this.#datepicker = flatpickr(
-      this.element.querySelector('.event-start-time-1'),
-      {
-        enableTime: true,
-        dateFormat: 'd/m/Y H:i',
-        defaultDate: this._state.dateFrom,
-        onChange: this.#dateFromChangeHandler,
-      },
-    );
-  }
+  #setDateFromDatePicker = () => {
+    {
+      this.#datepicker = flatpickr(
+        this.element.querySelector('#event-start-time-1'),
+        {
+          enableTime: true,
+          dateFormat: 'd/m/Y H:i',
+          defaultDate: this._state.dateFrom,
+          onChange: this.#dateFromChangeHandler,
+        }
+      );
+    }
   };
 
-
-  #setDateToatePicker = () => {{
-    this.#datepicker = flatpickr(
-      this.element.querySelector('.event-end-time-1'),
-      {
-        enableTime: true,
-        dateFormat: 'd/m/Y H:i',
-        defaultDate: this._state.dateTo,
-        onChange: this.#dateToChangeHandler,
-      },
-    );
-  }
+  #setDateToDatePicker = () => {
+    {
+      this.#datepicker = flatpickr(
+        this.element.querySelector('#event-end-time-1'),
+        {
+          enableTime: true,
+          dateFormat: 'd/m/Y H:i',
+          defaultDate: this._state.dateTo,
+          onChange: this.#dateToChangeHandler,
+        }
+      );
+    }
   };
 
   setEditClickHandler = (callback) => {
@@ -271,5 +265,16 @@ export default class FormEditView extends AbstractStatefulView {
   #editClickHandler = (evt) => {
     evt.preventDefault();
     this._callback.editClick();
+  };
+
+  static parsePointToState = (point) => ({
+    ...point,
+    destination: point.destination,
+    offers: point.offers,
+  });
+
+  static parseStateToPoint = (state) => {
+    const point = { ...state };
+    return point;
   };
 }
