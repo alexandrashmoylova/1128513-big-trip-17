@@ -1,17 +1,5 @@
 const TYPE = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
-// const DESTINATION = ['New York', 'Berlin', 'Portu', 'London', 'Amsterdam', 'Moscow', 'Reykjavik'];
-
-// const DESCRIPTION = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-//   'Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra.',
-//   'Aliquam id orci ut lectus varius viverra.',
-//   'Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.'
-// ];
-
-// const OFFERSTITLE = ['Choose the radio station', 'Upgrade to a business class', 'Comfortable seats', 'Drinks included', 'Add luggage'];
-
-// const PICS_QUATITY = 9;
-
 const SortType = {
   DAY: 'day',
   EVENT: 'event',
@@ -20,5 +8,17 @@ const SortType = {
   OFFERS: 'offers',
 };
 
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PAST: 'past',
+};
 
-export {TYPE, SortType};
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  ADD_POINT: 'ADD_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+};
+
+
+export {TYPE, SortType, FilterType, UserAction} ;
