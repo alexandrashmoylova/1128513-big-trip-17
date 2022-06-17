@@ -79,6 +79,7 @@ export default class BoardPresenter {
   #renderSort = () => {
     render(this.#sortComponent, this.#boardContainer, RenderPosition.AFTERBEGIN);
     this.#sortComponent.setSortTypeChangeHandler(this.#handleSortTypeChange);
+    // this.#sortComponent.forEach((element) => element.setSortTypeChangeHandler(this.#handleSortTypeChange));
   };
 
   #renderNoPoint = () => {
