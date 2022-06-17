@@ -1,6 +1,8 @@
 import {render, replace, remove} from '../framework/render.js';
 import WaypointView from '../view/waypoint-view.js';
 import FormEditView from '../view/form-edit-view.js';
+import {UserAction, UpdateType} from '../mock/const.js';
+import { isPointInFuture, isPointInPast } from '../utils/point.js';
 
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -39,6 +41,7 @@ export default class PointPresenter {
     this.#pointEditComponent.setEditClickHandler(this.#handleEditClickForm);
     this.#pointEditComponent.setFormSubmitHandler(this.#handleFormSubmit);
     this.#pointComponent.setFavoriteClickHandler(this.#handleFavoriteClick);
+    this.#pointEditComponent.setDeleteClickHandler(this.#handleDeleteClick);
 
     if (prevPointComponent === null || prevPointEditComponent === null) {
       render(this.#pointComponent, this.#pointListContainer);
@@ -88,7 +91,11 @@ export default class PointPresenter {
   };
 
   #handleFavoriteClick = () => {
-    this.#changeData({...this.#point, isFavorite: !this.#point.isFavorite});
+    this.#changeData(
+      UserAction.UPDATE_POINT,
+      UpdateType.MINOR,
+      {...this.#point, isFavorite: !this.#point.isFavorite}
+    );
   };
 
   #handleEditClick = () => {
@@ -100,8 +107,20 @@ export default class PointPresenter {
     this.#replaceFormToPoint();
   };
 
+  #handleDeleteClick = (point) => {
+    this.#changeData(
+      UserAction.DELETE_POINT,
+      UpdateType.MINOR,
+      point,
+    );
+  };
+
   #handleFormSubmit = (point) => {
-    this.#changeData(point);
+    this.#changeData(
+      UserAction.UPDATE_POINT,
+      UpdateType.MINOR,
+      point,
+    );
     this.#replaceFormToPoint();
   };
 }

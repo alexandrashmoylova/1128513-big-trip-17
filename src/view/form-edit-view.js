@@ -170,6 +170,7 @@ export default class FormEditView extends AbstractStatefulView {
     this.setEditClickHandler(this._callback.editClick);
     this.#setDateFromDatePicker();
     this.#setDateToDatePicker();
+    this.setDeleteClickHandler(this._callback.deleteClick);
   };
 
   setFormSubmitHandler = (callback) => {
@@ -209,17 +210,6 @@ export default class FormEditView extends AbstractStatefulView {
     this.element
       .querySelector('#event-destination-1')
       .addEventListener('change', this.#pointDestinationTypeHandler);
-  };
-
-  static parsePointToState = (point) => ({
-    ...point,
-    destination: point.destination,
-    offers: point.offers,
-  });
-
-  static parseStateToPoint = (state) => {
-    const point = { ...state };
-    return point;
   };
 
   #dateFromChangeHandler = ([userDate]) => {
@@ -268,9 +258,30 @@ export default class FormEditView extends AbstractStatefulView {
       .addEventListener('click', this.#editClickHandler);
   };
 
+  setDeleteClickHandler = (callback) => {
+    this._callback.deleteClick = callback;
+    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formDeleteClickHandler);
+  };
 
   #editClickHandler = (evt) => {
     evt.preventDefault();
     this._callback.editClick();
+  };
+
+  #formDeleteClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.deleteClick(FormEditView.parseStateToTask(this._state));
+  };
+
+
+  static parsePointToState = (point) => ({
+    ...point,
+    destination: point.destination,
+    offers: point.offers,
+  });
+
+  static parseStateToPoint = (state) => {
+    const point = { ...state };
+    return point;
   };
 }

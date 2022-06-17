@@ -10,7 +10,15 @@ const siteEventElement = document.querySelector('.trip-events');
 const pointModel = new PointModel();
 const boardPresenter = new BoardPresenter(siteEventElement, pointModel);
 
+const filters = [
+  {
+    type: 'everything',
+    name: 'EVERYTHING',
+    count: 0,
+  },
+];
+
 
 render(new TripInfoView(), siteTripMainElement, RenderPosition.AFTERBEGIN);
-render(new FilterView(), siteFilterElement);
+render(new FilterView(filters, 'everything'), siteFilterElement);
 boardPresenter.init();

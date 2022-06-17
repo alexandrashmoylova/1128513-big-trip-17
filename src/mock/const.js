@@ -20,5 +20,11 @@ const UserAction = {
   DELETE_POINT: 'DELETE_POINT',
 };
 
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+};
 
-export {TYPE, SortType, FilterType, UserAction} ;
+
+export {TYPE, SortType, FilterType, UserAction, UpdateType} ;
