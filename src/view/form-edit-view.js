@@ -63,8 +63,6 @@ const createDestinationPhoto = (photos) => (
 const createFormEditTemplate = (point) => {
   const { offers, destination, basePrice, dateTo, type, dateFrom } = point;
 
-  // const offersListByType = OFFERS.find((offer) => ((offer.type === type))).offers;
-
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       <header class="event__header">
@@ -166,7 +164,7 @@ export default class FormEditView extends AbstractStatefulView {
     );
   };
 
-  _restoreHandlers = () => { debugger
+  _restoreHandlers = () => {
     this.#setInnerHandlers();
     this.setFormSubmitHandler(this._callback.formSubmit);
     this.setEditClickHandler(this._callback.editClick);
