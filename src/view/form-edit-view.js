@@ -268,6 +268,7 @@ export default class FormEditView extends AbstractStatefulView {
       .addEventListener('click', this.#editClickHandler);
   };
 
+
   #editClickHandler = (evt) => {
     evt.preventDefault();
     this._callback.editClick();
