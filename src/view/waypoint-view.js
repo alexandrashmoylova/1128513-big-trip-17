@@ -15,7 +15,6 @@ const createWaypointTemplate = (point) => {
     </li>`
     ).join('');
 
-
   return (`<li class="trip-events__item">
               <div class="event">
                 <time class="event__date" datetime="${humanizePointDueDateYear(dateFrom)}">${humanizePointDueDate(dateFrom)}</time>
