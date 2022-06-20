@@ -20,4 +20,14 @@ const sortPointByDuration = (pointA, pointB) => {
   return durationPointB - durationPointA;
 };
 
-export {humanizePointDueDate, humanizePointDueTime, humanizePointDueDateYear, humanizePointDueDateYearTime, diffTimeHours, diffTimeMinutes, humanizePointEditDueTime, sortPointByPrice, sortPointByDay, sortPointByDuration};
+const isPointInFuture = (date) => {
+  const today = dayjs();
+  return dayjs(date).diff(today, 'days') > 0;
+};
+
+const isPointInPast = (date) => {
+  const today = dayjs();
+  return dayjs(today).diff(dayjs(date)) > 0;
+};
+
+export {humanizePointDueDate, humanizePointDueTime, humanizePointDueDateYear, humanizePointDueDateYearTime, diffTimeHours, diffTimeMinutes, humanizePointEditDueTime, sortPointByPrice, sortPointByDay, sortPointByDuration, isPointInFuture, isPointInPast};
