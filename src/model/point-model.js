@@ -48,3 +48,4 @@ export default class PointModel extends Observable {
     this._notify(updateType);
   };
 }
+

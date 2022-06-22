@@ -127,13 +127,23 @@ export default class BoardPresenter {
     this.#pointPresenter.set(point.id, pointPresenter);
   };
 
+  #renderList = (list) => {
+    for (let i = 0; i < list.length; i++) {
+      this.#renderPoint(list[i]);
+    }
+  };
+
+  #renderPointList = (sortedPoints) => {
+    render(this.#pointListComponent, this.#boardContainer);
+    this.#renderList(sortedPoints);
+  };
+
   #clearBoard = ({resetSortType = false} = {}) => {
     this.#pointNewPresenter.destroy();
     this.#pointPresenter.forEach((presenter) => presenter.destroy());
     this.#pointPresenter.clear();
 
     remove(this.#sortComponent);
-    remove(this.#noPointComponent);
 
     if (this.#noPointComponent) {
       remove(this.#noPointComponent);
@@ -145,7 +155,7 @@ export default class BoardPresenter {
   };
 
   #renderBoard = () => {
-    // const points = this.points;
+    const points = this.points;
     const pointCount = this.points.length;
 
     if (pointCount === 0) {
@@ -154,11 +164,8 @@ export default class BoardPresenter {
     }
     this.#renderSort();
     render(this.#pointListComponent, this.#boardContainer);
-    this.#renderPoints(this.points);
-  };
-
-  #renderPoints = (points) => {
-    points.forEach((point) => this.#renderPoint(point));
+    this.#renderPointList(points);
   };
 }
+
 

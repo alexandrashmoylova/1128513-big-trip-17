@@ -1,7 +1,7 @@
-
+import TripInfoView from './view/trip-info.js';
 import PointModel from './model/point-model.js';
 import BoardPresenter from './presenter/board-presenter.js';
-import {render} from './framework/render.js';
+import { render, RenderPosition } from './framework/render.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import FilterModel from './model/filter-model.js';
 import NewEventButtonView from './view/new-event-button-view.js';
@@ -35,6 +35,6 @@ const handleNewPointButtonClick = () => {
 render(newPointButtonComponent, siteTripMainElement);
 newPointButtonComponent.setClickHandler(handleNewPointButtonClick);
 
-
-boardPresenter.init();
+render(new TripInfoView(), siteTripMainElement, RenderPosition.AFTERBEGIN);
 filterPresenter.init();
+boardPresenter.init();

@@ -1,5 +1,5 @@
 import { render, replace, remove } from '../framework/render.js';
-import { FilterView } from '../view/filter-view.js';
+import FilterView from '../view/filter-view';
 import { FilterType, UpdateType } from '../mock/const.js';
 
 export default class FilterPresenter {
@@ -13,13 +13,11 @@ export default class FilterPresenter {
     this.#filterContainer = filterContainer;
     this.#filterModel = filterModel;
     this.#pointModel = pointModel;
-
     this.#pointModel.addObserver(this.#handleModelEvent);
     this.#filterModel.addObserver(this.#handleModelEvent);
   }
 
   get filters() {
-
     return [
       {
         type: FilterType.EVERYTHING,

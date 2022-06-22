@@ -1,33 +1,36 @@
 import AbstractView from '../framework/view/abstract-view.js';
 
 const createFilterItemTemplate = (filter, currentFilterType) => {
-  const {type, name} = filter;
+  const { type, name } = filter;
   return (
     `<div class="trip-filters__filter">
       <input
-        id="filter__${name}"
-        class="trip-filters__filter-input  visually-hidden"
-        type="radio"
-        name="trip-filter"
-        ${type === currentFilterType ? 'checked' : ''}
-        value="${type}"
-      />
-      <label class="trip-filters__filter-label" for="filter-${name}">${name}</label>
+      id="filter-${type}"
+      class="trip-filters__filter-input  visually-hidden"
+      type="radio"
+      name="trip-filter"
+      value="${type}"
+      ${type === currentFilterType ? 'checked' : ''}
+      >
+      <label class="trip-filters__filter-label" for="filter-${type}">
+      ${name}
+      </label>
     </div>`
   );
 };
 
-const createFiltersTemplate = (filterItems, currentFilterType) => {
+const createFilterTemplate = (filterItems, currentFilterType) => {
   const filterItemsTemplate = filterItems
     .map((filter) => createFilterItemTemplate(filter, currentFilterType))
     .join('');
 
-  return `<form class="trip-filters" action="#" method="get">
-    ${filterItemsTemplate}
-    <button class="visually-hidden" type="submit">Accept filter</button>
-  </form>`;
+  return (
+    `<form class="trip-filters" action="#" method="get">
+      ${filterItemsTemplate}
+      <button class="visually-hidden" type="submit">Accept filter</button>
+    </form>`
+  );
 };
-
 
 export default class FilterView extends AbstractView {
   #filters = null;
@@ -40,7 +43,7 @@ export default class FilterView extends AbstractView {
   }
 
   get template() {
-    return createFiltersTemplate(this.#filters, this.#currentFilter);
+    return createFilterTemplate(this.#filters, this.#currentFilter);
   }
 
   setFilterTypeChangeHandler = (callback) => {

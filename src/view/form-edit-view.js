@@ -182,7 +182,7 @@ export default class FormEditView extends AbstractStatefulView {
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this._callback.formSubmit(this.FormEditView.parsePointToState(this._state));
+    this._callback.formSubmit(FormEditView.parseStateToPoint(this._state));
   };
 
   #pointTypeHandler = (evt) => {
@@ -270,14 +270,12 @@ export default class FormEditView extends AbstractStatefulView {
 
   #formDeleteClickHandler = (evt) => {
     evt.preventDefault();
-    this._callback.deleteClick(FormEditView.parseStateToTask(this._state));
+    this._callback.deleteClick(FormEditView.parseStateToPoint(this._state));
   };
 
 
   static parsePointToState = (point) => ({
     ...point,
-    destination: point.destination,
-    offers: point.offers,
   });
 
   static parseStateToPoint = (state) => {
