@@ -48,7 +48,6 @@ const createOfferItemTemplate = (offerItems) => (
     ))
   .join('');
 
-
 const createDestinationList = (destinations) => destinations.map((destination) => (
   `<option value="${destination.name}"></option>`
 )).join('');
