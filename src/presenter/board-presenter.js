@@ -24,6 +24,7 @@ export default class BoardPresenter {
   #filterType = FilterType.EVERYTHING;
   #pointNewPresenter =  null;
 
+
   constructor(boardContainer, pointModel, filterModel) {
     this.#boardContainer = boardContainer;
     this.#pointModel = pointModel;
@@ -145,6 +146,7 @@ export default class BoardPresenter {
 
     remove(this.#sortComponent);
 
+
     if (this.#noPointComponent) {
       remove(this.#noPointComponent);
     }
@@ -167,5 +169,3 @@ export default class BoardPresenter {
     this.#renderPointList(points);
   };
 }
-
-
