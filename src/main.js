@@ -16,6 +16,7 @@ const boardPresenter = new BoardPresenter(
   pointModel,
   filterModel
 );
+
 const filterPresenter = new FilterPresenter(
   siteFilterElement,
   filterModel,
