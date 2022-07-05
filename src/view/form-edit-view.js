@@ -21,16 +21,29 @@ const BLANK_POINT = {
   type: '',
 };
 
-const createOffersTypeTemplate = (currentOffer) =>
-  TYPE
-    .map(
-      (offerType) =>
-        `<div class="event__type-item">
-<input id="event-type-${offerType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${offerType}"  ${currentOffer === offerType ? 'checked' : ''}>
-<label class="event__type-label  event__type-label--${offerType}" for="event-type-${offerType}-1">${offerType}</label>
-</div>`
-    )
-    .join('');
+const renderPointTypes = (types, checkedType) => Object.values(types).map((type) => {
+  const checked = type === checkedType ? 'checked' : '';
+  return    `<div class="event__type-item">
+  <input id="event-type-${type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${type}"  ${checked}>
+  <label class="event__type-label  event__type-label--${type}" for="event-type-${type}-1">${type}</label>
+  </div>`;
+}).join('');
+
+const createPointTypesTemplate = (checkedType) => (
+  `<div class='event__type-wrapper'>
+    <label class='event__type  event__type-btn' for='event-type-toggle-1'>
+      <span class='visually-hidden'>Choose event type</span>
+      <img class='event__type-icon' width='17' height='17' src='img/icons/${checkedType}.png' alt='Event type icon'>
+    </label>
+    <input class='event__type-toggle  visually-hidden' id='event-type-toggle-1' type='checkbox'>
+    <div class='event__type-list'>
+      <fieldset class='event__type-group'>
+        <legend class='visually-hidden'>Event type</legend>
+        ${renderPointTypes(TYPE, checkedType)}
+      </fieldset>
+    </div>
+  </div>`
+);
 
 
 const createOfferItemTemplate = (offerItems) => (
@@ -52,12 +65,56 @@ const createDestinationList = (destinations) => destinations.map((destination) =
   `<option value="${destination.name}"></option>`
 )).join('');
 
-const createDestinationPhoto = (photos) => (
-  photos.map(
-    (photo) =>
-      `<img class="event__photo" src=${photo.src} alt="Event photo">`
-  ))
-  .join('');
+const createDestinationsTemplate = (type, destination, allDestinations) => (
+  `<div class="event__field-group  event__field-group--destination">
+    <label class="event__label  event__type-output" for="event-destination-1">${type}</label>
+    <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${he.encode(destination)}" list="destination-list-1">
+    <datalist id="destination-list-1">
+      ${createDestinationList(allDestinations)}
+    </datalist>
+  </div>`
+);
+
+const renderDestinationPhotos = (allDestinations, checkedDestination) => {
+  const pointDestination = allDestinations.find((destination) => destination.name === checkedDestination);
+
+  return pointDestination.pictures.map((picture) => `<img class="event__photo" src="${picture.src}" alt="${picture.description}">`).join('');
+};
+
+// const createDestinationPhoto = (photos) => (
+//   photos.map(
+//     (photo) =>
+//       `<img class="event__photo" src=${photo.src} alt="Event photo">`
+//   ))
+//   .join('');
+
+const createPhotosTemplate = (allDestinations, checkedDestination) => {
+  const pointDestination = allDestinations.find((destination) => destination.name === checkedDestination);
+
+  return pointDestination && pointDestination.description !== '' ?
+    `<div class="event__photos-container">
+      <div class="event__photos-tape">
+        ${renderDestinationPhotos(allDestinations, checkedDestination)}
+      </div>
+    </div>` : '';
+};
+
+const renderAvailableOffers = (checkedType, allOffers, checkedOffers) => {
+  const pointTypeOffer = allOffers.find((offer) => offer.type === checkedType);
+
+  return pointTypeOffer.offers.map((offer) => {
+    const checked = checkedOffers.includes(offer.id) ? 'checked' : '';
+
+    return `<div class='event__offer-selector'>
+      <input class='event__offer-checkbox  visually-hidden' id='event-offer-luggage-${offer.id}' type='checkbox' name='event-offer-luggage' data-offer-id=${offer.id} ${checked}>
+      <label class='event__offer-label' for='event-offer-luggage-${offer.id}'>
+        <span class='event__offer-title'>${offer.title}</span>
+        &plus;&euro;&nbsp;
+        <span class='event__offer-price'>${offer.price}</span>
+      </label>
+    </div>`;
+  }).join('');
+};
 
 
 const createFormEditTemplate = (point) => {
